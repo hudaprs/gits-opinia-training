@@ -24,6 +24,7 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import {EntryPoint} from '@/EntryPoint';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -115,4 +116,8 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+const _App = () => {
+  return <EntryPoint />;
+};
+
+export default _App;

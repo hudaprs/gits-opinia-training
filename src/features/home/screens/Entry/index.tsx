@@ -1,13 +1,13 @@
 // React
-import { memo } from 'react'
+import {memo} from 'react';
 
 // React Native
-import { Text } from 'react-native'
+import {Text} from 'react-native';
 
 const HomeEntryScreen = memo(() => {
-	return <Text>Hello World</Text>
-})
+  return <Text>Hello World</Text>;
+});
 
-HomeEntryScreen.displayName = 'HomeEntryScreen'
+HomeEntryScreen.displayName = 'HomeEntryScreen';
 
-export { HomeEntryScreen }
+export {HomeEntryScreen};
