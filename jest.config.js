@@ -6,7 +6,7 @@ module.exports = {
       statements: 80,
     },
   },
-  collectCoverageFrom: ['src/**/*.tsx'],
+  collectCoverageFrom: ['src/**/*.tsx', 'src/**/utils/*.ts'],
   transformIgnorePatterns: [
     '/node_modules/(?!(@react-native|react-native|react-native-reanimated|redux-persist|@react-navigation/.*)/).*/',
   ],
