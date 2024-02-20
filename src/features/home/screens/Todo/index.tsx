@@ -11,7 +11,7 @@ import {
 import {useNavigation} from '@react-navigation/native';
 
 // Types
-import {HomeEntryScreenProps} from './types';
+import {HomeTodoScreenProps} from './types';
 
 // Enums
 import {HomeStackNavigation} from '@/features/app/enums/navigation.enum';
@@ -34,21 +34,21 @@ const styles = StyleSheet.create({
   },
 });
 
-const HomeEntryScreen = () => {
+const HomeTodoScreen = () => {
   // Navigation
-  const navigation = useNavigation<HomeEntryScreenProps>();
+  const navigation = useNavigation<HomeTodoScreenProps>();
 
   return (
     <SafeAreaView>
       <View style={styles.header}>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate(HomeStackNavigation.TODO)}>
-          <Text style={styles.textWhite}>Go To Todo</Text>
+          onPress={() => navigation.navigate(HomeStackNavigation.ENTRY)}>
+          <Text style={styles.textWhite}>Go To Home</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
 };
 
-export {HomeEntryScreen};
+export {HomeTodoScreen};
