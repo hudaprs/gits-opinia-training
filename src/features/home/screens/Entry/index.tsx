@@ -8,21 +8,21 @@ import {
 } from 'react-native';
 
 // React Navigation
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 // Types
-import {HomeEntryScreenProps} from './types';
+import { HomeEntryScreenProps } from './types';
 
 // Enums
-import {HomeStackNavigation} from '@/features/app/enums/navigation.enum';
+import { HomeStackNavigation } from '@/features/app/enums/navigation.enum';
 
 const styles = StyleSheet.create({
   header: {
-    paddingHorizontal: 10,
+    padding: 20,
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'space-evenly',
   },
   button: {
     backgroundColor: '#0C356A',
@@ -46,9 +46,15 @@ const HomeEntryScreen = () => {
           onPress={() => navigation.navigate(HomeStackNavigation.TODO)}>
           <Text style={styles.textWhite}>Go To Todo</Text>
         </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate(HomeStackNavigation.NATIVE)}>
+          <Text style={styles.textWhite}>Go To Native</Text>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
 };
 
-export {HomeEntryScreen};
+export { HomeEntryScreen };

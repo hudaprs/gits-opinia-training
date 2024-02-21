@@ -5,4 +5,5 @@ export enum AppStackNavigation {
 export enum HomeStackNavigation {
   ENTRY = 'Entry',
   TODO = 'Todo',
+  NATIVE = 'Native',
 }
