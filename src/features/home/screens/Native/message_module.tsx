@@ -1,19 +1,27 @@
-import { ImageSourcePropType, ImageStyle, NativeModules, StyleProp, requireNativeComponent } from 'react-native'
+import {
+	ImageSourcePropType,
+	ImageStyle,
+	NativeModules,
+	StyleProp,
+	requireNativeComponent
+} from 'react-native'
 
-const { MessageModule } = NativeModules;
+const { MessageModule } = NativeModules
 
 type NativeImageViewProps = {
-    src: ImageSourcePropType;
-    borderRadius: number;
-    style: StyleProp<ImageStyle>;
+	src: ImageSourcePropType
+	borderRadius: number
+	style: StyleProp<ImageStyle>
 }
 
-const NativeImageViewComponent = requireNativeComponent("NativeImageView")
+const NativeImageViewComponent = requireNativeComponent('NativeImageView')
 
 const NativeImageView = (props: NativeImageViewProps) => {
-    return <>
-        <NativeImageViewComponent {...props} />
-    </>
+	return (
+		<>
+			<NativeImageViewComponent {...props} />
+		</>
+	)
 }
 
 export { MessageModule, NativeImageView }

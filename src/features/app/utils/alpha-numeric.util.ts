@@ -6,5 +6,5 @@
  * @return {boolean} boolean
  */
 export const alphaNumeric = (value: string): boolean => {
-  return /^[a-z\d\s]+$/i.test(value);
-};
+	return /^[a-z\d\s]+$/i.test(value)
+}

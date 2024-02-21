@@ -1,6 +1,6 @@
 export interface IAppCommonLoading {
-  isDefaultLoading: boolean;
-  isCreateEditLoading: boolean;
-  isDeleteLoading: boolean;
-  isDetailLoading: boolean;
+	isDefaultLoading: boolean
+	isCreateEditLoading: boolean
+	isDeleteLoading: boolean
+	isDetailLoading: boolean
 }

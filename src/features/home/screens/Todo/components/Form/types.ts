@@ -1,3 +1,3 @@
 export type FormProps = {
-  onSubmit: (title: string) => Promise<void>;
-};
+	onSubmit: (title: string) => Promise<void>
+}

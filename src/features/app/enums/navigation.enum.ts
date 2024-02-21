@@ -1,9 +1,9 @@
 export enum AppStackNavigation {
-  HOME = 'Home',
+	HOME = 'Home'
 }
 
 export enum HomeStackNavigation {
-  ENTRY = 'Entry',
-  TODO = 'Todo',
-  NATIVE = 'Native',
+	ENTRY = 'Entry',
+	TODO = 'Todo',
+	NATIVE = 'Native'
 }
