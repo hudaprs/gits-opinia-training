@@ -41,7 +41,8 @@ const styles = StyleSheet.create({
 		display: 'flex',
 		flexDirection: 'row',
 		alignItems: 'center',
-		justifyContent: 'space-between'
+		justifyContent: 'space-between',
+		paddingVertical: 10
 	},
 	button: {
 		backgroundColor: '#0C356A',
@@ -68,7 +69,7 @@ const styles = StyleSheet.create({
 		borderBottomWidth: 1,
 		borderColor: '#ccc',
 		height: 10,
-		marginVertical: 10
+		marginBottom: 10
 	},
 	input: {
 		height: 40,
@@ -187,16 +188,11 @@ const HomeTodoScreen = () => {
 					keyExtractor={item => item.id.toString()}
 					contentContainerStyle={memoizedContentContainerStyle}
 					data={todoList}
-					renderItem={({ item, index }) => (
-						<>
-							<View style={styles.itemWrapper}>
-								<Item completed={item.completed} title={item.title} />
-							</View>
-
-							{todoList.length - 1 !== index && (
-								<View style={styles.itemDivider} />
-							)}
-						</>
+					testID='flatList'
+					renderItem={({ item }) => (
+						<View style={styles.itemWrapper}>
+							<Item completed={item.completed} title={item.title} />
+						</View>
 					)}
 				/>
 				{/* End List */}

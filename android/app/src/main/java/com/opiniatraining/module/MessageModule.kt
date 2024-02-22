@@ -10,8 +10,9 @@ class MessageModule(reactContext: ReactApplicationContext) :
     override fun getName() = "MessageModule"
 
     @ReactMethod
-    fun createMessageEvent(message: String) {
+    fun createMessageEvent(message: String) :String{
         Toast.makeText(reactApplicationContext, message, Toast.LENGTH_SHORT).show()
+        return "BERHASIL";
     }
 }
 
