@@ -257,9 +257,7 @@ yarn add -D lint-staged
 yarn lint-staged
 ```
 
-## Commit Lint
-
-### 🛠️ Implementasi
+## 🛠️ Unit Test
 
 1. Buat atau Update file `jest.config.js` pada root directory menjadi seperti berikut:
 
