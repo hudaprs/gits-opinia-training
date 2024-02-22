@@ -1,79 +1,342 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Standardization
 
-# Getting Started
+Berikut adalah langkah-langkah untuk mengimplementasikan hal-hal umum terkait standarisasi untuk memulai project pengembangan React Native:
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+## ✅ Introduction
 
-## Step 1: Start the Metro Server
+Sistem ini menggunakan:
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+- React Native
+- Node >=18
+- Yarn
 
-To start Metro, run the following command from the _root_ of your React Native project:
+Setup Project
 
-```bash
-# using npm
-npm start
-
-# OR using Yarn
-yarn start
+```shell
+yarn install
 ```
 
-## Step 2: Start your Application
+Setup iOS
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+```shell
+npx pod-install ios && yarn ios
+```
 
-### For Android
+Run Android
 
-```bash
-# using npm
-npm run android
-
-# OR using Yarn
+```
 yarn android
 ```
 
-### For iOS
+## 🗂️ Folder Structure
 
-```bash
-# using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
+```javascript
+|___tests__                       // Contain all test of the application (inside is the same as the root folder, but ony contain App.test.tsx and src folder)
+|
+|src                              // Entry point for the app.
+|___assets                        // Assets, images, fonts, styles, etc.
+|   |______images
+|   |____________icon             // Contain icon for the project
+|   |____________{another}        // Another related to images
+|   |______fonts                  // Contain fonts that used inside the project
+|
+|___features                      // Contain all of your features
+|   |______app                    // Core of feature in the project, usually contain reusable API.
+|   |____________enums            // Contain static value / constant
+|   |____________types            // Contain types for feature
+|   |____________navigations      // Contain routing, according feature
+|   |____________screens          // Contain UI / View for the app
+|   |____________utils            // Contain utility that reusable for another component or it-self
+|   |
+|   |
+|   |______{another}              // Another features, the content same as above.
 ```
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+## ⚙️ VSCode Extension
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+- [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 
-## Step 3: Modifying your App
+Prettier adalah suatu formatter yang digunakan untuk melakukan formatting ketika melakukan pengembangan menggunakan Tech Stack ini. Extension ini sangat dibutuhkan untuk membuat code yang ditulis memenuhi style yang sudah ditentukan.
 
-Now that you have successfully run the app, let's modify it.
+- [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+ESLint adalah suatu extension yang digunakan untuk menganalisis apa yang terjadi di dalam suatu project yang menggunakan Tech Stack ini. ESLint sangat dibutuhkan dalam pengembangan, dikarenakan kita akan mudah untuk melakukan tracing error, fix bug, dan mungkin meningkatkan code quality dalam suatu pengembangan.
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
+- [ES7+ React/Redux/React-Native snippets](https://marketplace.visualstudio.com/items?itemName=dsznajder.es7-react-js-snippets)
 
-## Congratulations! :tada:
+Extension ini berguna untuk membantu mempercepat pengembangan React dengan adanya snippet yang sudah disediakan di dalamnya.
 
-You've successfully run and modified your React Native App. :partying_face:
+### 🛠️ Implementasi
 
-### Now what?
+1. Install Dev Dependencies
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
+```shell
+yarn add -D prettier @react-native-community/eslint-config@^3.2.0 @typescript-eslint/eslint-plugin@^5.54.1 @typescript-eslint/parser@^5.54.1 eslint@^8.36.0 eslint-config-prettier@^8.7.0 eslint-plugin-prettier@5.0.0 eslint-plugin-react-hooks@^4.6.0
+```
 
-# Troubleshooting
+2. Update Prettier Config
 
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+```json
+{
+	"semi": false,
+	"arrowParens": "avoid",
+	"jsxSingleQuote": true,
+	"singleQuote": true,
+	"trailingComma": "none",
+	"tabWidth": 2,
+	"useTabs": true,
+	"endOfLine": "auto"
+}
+```
 
-# Learn More
+3. Update ESLint Config
 
-To learn more about React Native, take a look at the following resources:
+```json
+// .eslintrc.json
+{
+	"root": true,
+	"env": {
+		"node": true,
+		"browser": true,
+		"es2021": true,
+		"jest": true
+	},
+	"extends": [
+		"eslint:recommended",
+		"plugin:react/recommended",
+		"plugin:prettier/recommended",
+		"plugin:@typescript-eslint/recommended",
+		"plugin:react-hooks/recommended"
+	],
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"ecmaFeatures": {
+			"jsx": true
+		},
+		"ecmaVersion": "latest",
+		"sourceType": "module"
+	},
+	"plugins": ["react", "react-native", "@typescript-eslint", "react-hooks"],
+	"ignorePatterns": [
+		"!.*",
+		"dist",
+		"node_modules",
+		"src/test",
+		"__tests__",
+		"__mocks__"
+	],
+	"rules": {
+		// JSX
+		"react/react-in-jsx-scope": "off",
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+		// Hook
+		"react-hooks/rules-of-hooks": "error",
+		"react-hooks/exhaustive-deps": "warn"
+	},
+	"settings": {
+		"react": {
+			"version": "detect"
+		}
+	}
+}
+```
+
+3. Update VsCode Settings
+
+Tambahkan `.vscode/settings.json` atau update `settings.json` di dalam VSCode untuk menstandarisasi semua user yang memakai VSCode agar config nya dengan standar yang sudah ditentukan.
+
+```json
+{
+	"typescript.tsdk": "node_modules\\typescript\\lib",
+	"typescript.enablePromptUseWorkspaceTsdk": true,
+	"editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
+	"editor.formatOnPaste": false, // required
+	"editor.formatOnType": false, // required
+	"editor.formatOnSave": true, // optional
+	"editor.formatOnSaveMode": "file", // required to format on save
+	"files.autoSave": "off", // optional but recommended
+	"vs-code-prettier-eslint.prettierLast": "false", // set as "true" to run 'prettier' last not first
+	"[javascript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[typescript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[typescriptreact]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[json]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	}
+}
+```
+
+4. Update `package.json`
+
+Hal terakhir pada implementasi standarisasi dari sisi code adalah penambahan script untuk menjalankan eslint dan prettier secara bersamaan.
+
+```json
+// ...package.json
+{
+	"lint": "eslint \"src/**/*.{js,jsx,ts,tsx,json}\"",
+	"lint:fix": "eslint --fix \"src/**/*.{js,jsx,ts,tsx,json}\"",
+	"lint:format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,md,json}\" --config ./.prettierrc"
+}
+```
+
+## 🛠️ Commit Lint & Husky
+
+1. Init Husky
+
+```shell
+npx husky-init && yarn
+```
+
+2. Install Commitlint
+
+```shell
+yarn add -D @commitlint/config-conventional @commitlint/cli
+```
+
+3. Tambahkan Hook Untuk Menjalankan Husky
+
+```shell
+npx husky add .husky/commit-msg 'npx --no-install commitlint --edit "$1"'
+```
+
+4. Tambahkan file `commitlint.config.js` di root project
+
+```javascript
+module.exports = {
+	extends: ['@commitlint/config-conventional'],
+	rules: {
+		'type-enum': [
+			2,
+			'always',
+			[
+				'chore',
+				'ci',
+				'docs',
+				'feat',
+				'fix',
+				'refactor',
+				'revert',
+				'style',
+				'test'
+			]
+		],
+		'type-case': [2, 'always', 'lowerCase'],
+		'type-empty': [2, 'never'],
+		'scope-case': [2, 'always', 'lowerCase']
+	}
+}
+```
+
+5. Tambahkan lint-staged untuk melakukan pre-commit
+
+```shell
+yarn add -D lint-staged
+```
+
+6. Update `package.json` dan sisipkan code berikut
+
+```json
+{
+	"lint-staged": {
+		"*.{js,jsx,ts,tsx}": ["yarn lint:format", "yarn lint"]
+	}
+}
+```
+
+7. Masuk ke dalam `.husky/pre-commit` dan update code menjadi seperti berikut
+
+```sh
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+yarn lint-staged
+```
+
+## Commit Lint
+
+### 🛠️ Implementasi
+
+1. Buat atau Update file `jest.config.js` pada root directory menjadi seperti berikut:
+
+```javascript
+module.exports = {
+	preset: 'react-native',
+	cacheDirectory: './cache',
+	coverageThreshold: {
+		global: {
+			statements: 80
+		}
+	},
+	collectCoverageFrom: ['src/**/*.tsx'],
+	transformIgnorePatterns: [
+		'/node_modules/(?!(@react-native|react-native|react-native-reanimated|redux-persist|@react-navigation/.*)/).*/'
+	],
+	setupFilesAfterEnv: ['<rootDir>/jest.setup.ts']
+}
+```
+
+2. Install React Testing Library
+
+```shell
+yarn add -D @testing-library/react-native @types/jest
+```
+
+3. Buat file `jest.setup.ts` pada root dir yang berisikan code seperti berikut:
+
+```javascript
+// Testing Library
+import '@testing-library/react-native/extend-expect'
+
+// Silence the warning: Animated: `useNativeDriver` is not supported because the native animated module is missing
+jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper')
+```
+
+4. Testing
+
+Berikut adalah cara cara untuk melakukan testing di dalam React Native
+
+Update `package.json` script menjadi seperti berikut:
+
+```shell
+yarn test
+```
+
+This will watch all the test files. It is very useful while writing tests and quickly seeing results.
+
+```shell
+yarn test:watch
+```
+
+- Unit Test
+  Terdapat kode yang dimana file tersebut hanya mempunyai logika pengecekan, hal seperti ini adalah `unit` apabila kita merujuk ke ranah testing.
+
+- Integration Test
+  Integration test di sini adalah suatu test case yang dimana di dalamnya terdapat integrasi ke dalam API, atau memanggil data-data yang lain.
+
+- UI Test
+  UI test adalah suatu test yang hanya melihat UI (tampilan saja) dan tidak banyak logika atau bisnis proses di dalamnya.
+
+Setup ini bisa disesuaikan sesuai package yang digunakan
+
+5. **Bonus** Tambahkan CI pada GitHub workflows untuk melakukan pengetesan secara otomatis, berikut code nya
+
+```yaml
+name: Opinia - Test
+
+on:
+  pull_request:
+    branches: ['main']
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Testing
+        run: yarn install && yarn test
+```
